@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import {postSmurfs} from "../actions"
 
 const SmurfForm = (props) => {
-    const [smurfInfo, setSmurfInfo] = useState({
+    const [smurf, setSmurf] = useState({
         name: "",
         age: "",
         height: ""
@@ -11,11 +11,15 @@ const SmurfForm = (props) => {
     
     const submitHandler = (event) => {
         event.preventDefault()
-        props.postSmurfs(smurfInfo)
+        console.log("this is a smurf:", smurf)
+
+        props.postSmurfs(smurf)
+
+        console.log("smurf submit: ", props.postSmurfs(smurf))
     }
     const changeHandler = (event) => {
         event.preventDefault()
-        setSmurfInfo({...smurfInfo, [event.target.name]: event.target.value})
+        setSmurf({...smurf, [event.target.name]: event.target.value})
     }
 
     return (
@@ -51,7 +55,7 @@ const SmurfForm = (props) => {
 
 const mapStateToProps = (state) => {
     return {
-        smurf: state.smurfs,
+        smurfs: state.smurfs,
         isLoading: state.isLoading,
         errors: state.errors
     }

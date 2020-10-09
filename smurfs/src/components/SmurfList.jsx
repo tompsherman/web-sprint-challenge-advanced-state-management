@@ -7,7 +7,7 @@ import SmurfCard from "./SmurfCard.jsx"
 
 
 const SmurfList = (props) => {
-
+console.log("list props: ", props)
     useEffect(()=>{
         props.fetchSmurfs()
     }, [])

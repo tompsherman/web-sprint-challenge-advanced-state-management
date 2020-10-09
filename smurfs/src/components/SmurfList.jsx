@@ -14,7 +14,7 @@ const SmurfList = (props) => {
     return (
         <div>
             <h2>this is the smurf list</h2>
-            x{
+            {
                 props.smurfs.map(item => (
                     <SmurfCard key={item.id} item={item} />
                 ))

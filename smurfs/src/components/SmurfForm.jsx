@@ -1,12 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {connect} from "react-redux"
+import {postSmurfs} from "../actions"
 
-const SmurfForm = () => {
+const SmurfForm = (props) => {
+    const [smurfInfo, setSmurfInfo] = useState({
+        name: "",
+        age: "",
+        height: ""
+    })
     
     const submitHandler = (event) => {
         event.preventDefault()
+        props.postSmurfs(smurfInfo)
     }
     const changeHandler = (event) => {
         event.preventDefault()
+        setSmurfInfo({...smurfInfo, [event.target.name]: event.target.value})
     }
 
     return (
@@ -16,21 +25,21 @@ const SmurfForm = () => {
                 <input 
                     type="text" 
                     name="name" 
-                    value="hardcoded"
+                    value={props.name}
                     onChange={changeHandler}
                     placeholder="enter smurf name"
                 />
                 <input 
                     type="text" 
                     name="age" 
-                    value="hardcoded"
+                    value={props.age}
                     onChange={changeHandler}
                     placeholder="enter smurf age"
                 />
                 <input 
                     type="text" 
                     name="height" 
-                    value="hardcoded"
+                    value={props.height}
                     onChange={changeHandler}
                     placeholder="enter smurf height"
                 />
@@ -40,4 +49,12 @@ const SmurfForm = () => {
     )
 }
 
-export default SmurfForm
+const mapStateToProps = (state) => {
+    return {
+        smurf: state.smurfs,
+        isLoading: state.isLoading,
+        errors: state.errors
+    }
+}
+
+export default connect (mapStateToProps, {postSmurfs}) (SmurfForm)
